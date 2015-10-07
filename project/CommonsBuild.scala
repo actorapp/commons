@@ -4,7 +4,6 @@ import sbt._
 object CommonsBuild {
   val settings: Seq[Setting[_]] = Seq(
     organization := "im.actor",
-    organization := "im.actor",
     organizationHomepage := Some(new URL("https://actor.im/")),
     scalaVersion := "2.11.7",
     resolvers ++= Seq(
