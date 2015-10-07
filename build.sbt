@@ -5,9 +5,8 @@ import ReleaseStateTransformations._
 import com.typesafe.sbt.pgp.PgpKeys._
 
 name := "actor-commons"
-organization := "im.actor"
-organizationName := "Actor LLC"
-organizationHomepage := Some(new URL("https://actor.im/"))
+
+CommonsBuild.settings
 
 lazy val actorConcurrent = project in file("actor-concurrent")
 
