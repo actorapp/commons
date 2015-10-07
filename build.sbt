@@ -9,7 +9,7 @@ organization := "im.actor"
 organizationName := "Actor LLC"
 organizationHomepage := Some(new URL("https://actor.im/"))
 
-lazy val actorConcurrent = project in file("concurrent")
+lazy val actorConcurrent = project in file("actor-concurrent")
 
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
