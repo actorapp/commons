@@ -1,4 +1,3 @@
-import java.net.URL
 import sbt.Keys._
 import sbtrelease._
 import ReleaseStateTransformations._
