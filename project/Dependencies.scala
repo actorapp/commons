@@ -2,7 +2,7 @@ import sbt._
 import Keys._
 
 object V {
-  val Akka = "2.3.13"
+  val Akka = "2.4.0"
   val Scalatest = "2.2.4"
 }
 
