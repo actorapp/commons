@@ -9,6 +9,7 @@ CommonsBuild.settings
 
 lazy val actorConcurrent = project in file("actor-concurrent")
 lazy val actorUtil = project in file("actor-util")
+lazy val actorCatsSlick = project in file("actor-cats-slick")
 
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
@@ -23,6 +24,7 @@ releaseProcess := Seq[ReleaseStep](
   commitNextVersion,
   releaseStepTask(publishSigned in actorConcurrent),
   releaseStepTask(publishSigned in actorUtil),
+  releaseStepTask(publishSigned in actorCatsSlick),
   ReleaseStep(action = Command.process("sonatypeReleaseAll", _)),
   pushChanges
 )
