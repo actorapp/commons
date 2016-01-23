@@ -1,4 +1,4 @@
-package im.actor.push.util
+package im.actor.util
 
 import java.security.SecureRandom
 
