@@ -1,8 +1,8 @@
 package im.actor.concurrent
 
-import akka.actor.{ Stash, ActorRef, Actor }
+import akka.actor.{ ActorLogging, Stash, ActorRef, Actor }
 
-trait ActorStashing extends Actor with Stash {
+trait StashingActor extends Actor with Stash with ActorLogging {
   protected def becomeStashing(f: ActorRef ⇒ Receive, discardOld: Boolean = false): Unit =
     context.become(receiveStashing(f), discardOld = discardOld)
 
@@ -10,6 +10,8 @@ trait ActorStashing extends Actor with Stash {
     f(sender()) orElse stashing
 
   private def stashing: Receive = {
-    case msg ⇒ stash()
+    case msg ⇒
+      log.debug("Stashing message: {}", msg)
+      stash()
   }
 }

@@ -32,13 +32,13 @@ trait ActorFutures extends Stash with ActorLogging { this: Actor ⇒
 
   protected final def futureWaitingBehavior(replyTo: ActorRef): Receive = {
     case f @ Status.Failure(e) ⇒
-      log.warning("Failure {}", e)
+      log.error(e, "Failure while waiting for future")
       replyTo ! f
 
       unstashAll()
       context.unbecome()
     case msg ⇒
-      log.warning("Stashing while waiting for future {}", msg)
+      log.debug("Stashing while waiting for future: {}", msg)
       stash()
   }
 }
