@@ -1,6 +1,6 @@
 package im.actor.concurrent
 
-import scala.concurrent.{ ExecutionContext, Future }
+import scala.concurrent.{ExecutionContext, Future}
 
 object FutureExt extends FutureExt
 
