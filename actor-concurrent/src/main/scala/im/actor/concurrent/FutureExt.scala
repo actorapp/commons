@@ -13,4 +13,11 @@ trait FutureExt {
     if (xs.isEmpty) Future successful Seq.empty[B]
     else f(xs.head) flatMap { fh ⇒ ftraverse(xs.tail)(f) map (r ⇒ fh +: r) }
   }
+
+  def ftraverse[A, B](xs: Seq[A], parallelism: Int)(f: A => Future[B])(implicit ec: ExecutionContext): Future[Seq[B]] = {
+    val xss = xs.grouped(parallelism).toSeq
+    ftraverse(xss) { xs =>
+      Future.sequence(xs map f)
+    } map (_.flatten)
+  }
 }
