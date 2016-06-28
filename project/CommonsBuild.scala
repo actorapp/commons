@@ -5,7 +5,7 @@ object CommonsBuild {
   val settings: Seq[Setting[_]] = Seq(
     organization := "im.actor",
     organizationHomepage := Some(new URL("https://actor.im/")),
-    scalaVersion := "2.11.7",
+    scalaVersion := "2.11.8",
     resolvers ++= Seq(
       Resolver.sonatypeRepo("releases")
     ),
