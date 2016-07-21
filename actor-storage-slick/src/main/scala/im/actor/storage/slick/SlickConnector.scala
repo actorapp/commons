@@ -39,7 +39,7 @@ class SlickConnector(db: Database)(implicit ec: ExecutionContext) extends Connec
       Await.result(
         db.run(sqlu"""CREATE TABLE IF NOT EXISTS #$tName (key TEXT, value BYTEA, PRIMARY KEY (key))""") map (_ => ()),
         10 seconds)
-      log.debug("Created table: {}", tName)
+//      log.debug("Created table: {}", tName)
       tables += name
     }
   }
@@ -50,7 +50,7 @@ class SlickConnector(db: Database)(implicit ec: ExecutionContext) extends Connec
     db.run(sql"""SELECT value FROM #${tableName(name)} WHERE key = $key""".as[Array[Byte]].headOption)
 
   private def getByPrefix(name: String, keyPrefix: String): Future[Vector[(String, Array[Byte])]] =
-    db.run(sql"""SELECT (key, value) FROM #${tableName(name)} WHERE key like $keyPrefix%""".as[(String, Array[Byte])])
+    db.run(sql"""SELECT key, value FROM #${tableName(name)} WHERE key like '#$keyPrefix%'""".as[(String, Array[Byte])])
 
   private def upsert(name: String, key: String, value: Array[Byte]): Future[Int] = {
     val tName = tableName(name)
