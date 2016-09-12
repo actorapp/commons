@@ -17,8 +17,6 @@ trait DBIOInstances extends DBIOInstances1 {
     new DBIOCoflatMap with MonadError[DBIO, Throwable] {
       def pure[A](x: A): DBIO[A] = DBIO.successful(x)
 
-      override def pureEval[A](x: Eval[A]): DBIO[A] = DBIO.successful(x.value)
-
       def flatMap[A, B](fa: DBIO[A])(f: A ⇒ DBIO[B]): DBIO[B] = fa.flatMap(f)
 
       def handleErrorWith[A](fea: DBIO[A])(f: Throwable ⇒ DBIO[A]): DBIO[A] =
@@ -53,6 +51,8 @@ trait DBIOInstances extends DBIOInstances1 {
         }
 
       override def map[A, B](fa: DBIO[A])(f: A ⇒ B): DBIO[B] = fa.map(f)
+
+      def tailRecM[A, B](a: A)(f: A => DBIO[Either[A, B]]): DBIO[B] = defaultTailRecM(a)(f)
     }
 
   implicit def DBIOGroup[A: Group](implicit ec: ExecutionContext): Group[DBIO[A]] =
